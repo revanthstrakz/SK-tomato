@@ -1944,6 +1944,7 @@ static int __init ipa_wwan_init(void)
 	if (!ipa_ssr_workqueue)
 		return -ENOMEM;
 	mutex_init(&add_mux_channel_lock);
+
 	subsys = subsys_notif_register_notifier(SUBSYS_MODEM, &ssr_notifier);
 	if (!IS_ERR(subsys)) {
 		return platform_driver_register(&rmnet_ipa_driver);
