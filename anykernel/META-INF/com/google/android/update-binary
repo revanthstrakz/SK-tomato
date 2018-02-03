@@ -45,7 +45,7 @@ abort() {
 }
 
 show_progress 1.34 4;
-ui_print " ";
+ui_print "****************************************";
 cleanup;
 mkdir -p /tmp/anykernel/bin;
 cd /tmp/anykernel;
@@ -57,31 +57,58 @@ bb=/tmp/anykernel/tools/busybox;
 chmod 755 $bb;
 $bb chmod -R 755 /tmp/anykernel/tools /tmp/anykernel/bin;
 
-ui_print "$(file_getprop /tmp/anykernel/anykernel.sh kernel.string)";
-ui_print " ";
-ui_print "AzurE Kernel By Panchajanya Sarkar a.k.a Lynx 06_08";
-ui_print " ";
+android_ver=$(mount /system; grep "^ro.build.version.release" /system/build.prop | cut -d= -f2; umount /system);
+rom=$(mount /system; grep "^ro.modversion" /system/build.prop | cut -d= -f2; umount /system);
+sdk=$(mount /system; grep "^ro.build.version.sdk" /system/build.prop | cut -d= -f4; umount /system);
+
+ui_print "************AzurE Kernel***************";
+ui_print "**Detecting ROM.....";
+ui_print "**ROM is $rom";
+ui_print "**Detecting Android Version.......";
+ui_print "**$android_ver detected!!";
+ui_print "**SDK $sdk detected!!";
+case "$android_ver" in
+  "5.0"|"5.1.1"|"6.0"|"6.0.1"|"7.0"|"7.1"|"7.1.1"|"7.1.2") compatibility_string="**Your version is unsupported, Your device will not boot!";;
+  "8.0.0"|"8.0"|"8.1.0") compatibility_string="**Your version is supported!";;
+esac;
+ui_print "$compatibility_string";
+ui_print "**Time For Real Installation**";
+ui_print "*****************************************************";
+ui_print "|          A                  **Spectrum Support!!  |";
+ui_print "|         A A                 **Lots Of Features!!  |";
+ui_print "|        A   A                                      |";
+ui_print "|       A     A               UU    UURrr   Eeeeee  |";
+ui_print "|      A       A              UU    UU   r  E       |";
+ui_print "|     A aaaaaaa A       Zzzzz UU    UURrr   Eeee    |";
+ui_print "|    A           A        Z   UU    UU r    E       |";
+ui_print "|   A             A      Z    UU    UU  r   E       |";
+ui_print "|  A               A    Z       UUUU        Eeeeee  |";
+ui_print "| A                 A  Zzzzzz                       |";
+ui_print "|***************************************************|";
+ui_print "**Mounting System.....";
+ui_print "**System Mounted - Read Only**";
+ui_print "**Fetching Build Prop.....";
 umount /system 2>/dev/null;
 mount -o ro -t auto /system;
 mount /data 2>/dev/null;
 test -f /system/system/build.prop && root=/system;
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.devicecheck)" == 1 ]; then
-  ui_print "Checking device...";
+  ui_print "**Checking device...";
   for i in 1 2 3 4 5; do
     testname="$(file_getprop /tmp/anykernel/anykernel.sh device.name$i)";
     if [ "$(getprop ro.product.device)" == "$testname" -o "$(getprop ro.build.product)" == "$testname" ]; then
-      ui_print "$testname";
+      ui_print "**Device Detected - $testname";
       match=1;
     fi;
   done;
-  ui_print " ";
+  ui_print "***************************************************";
   if [ "$match" != 1 ]; then
-    abort "Unsupported device. Aborting...";
+    abort "**Unsupported device. Aborting...";
   fi;
 fi;
 
-ui_print "Installing AzurE kernel for Oreo ROMs on $testname...";
+ui_print "**Installing AzurE kernel for Oreo ROMs on $testname...";
 for i in $($bb --list); do
   $bb ln -s $bb /tmp/anykernel/bin/$i;
 done;
@@ -108,9 +135,10 @@ debugging;
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.cleanup)" == 1 ]; then
   cleanup;
 fi;
-ui_print "Wipe Dalvik Cache And Cache Now for better Results....."
+ui_print "**Wipe Dalvik Cache And Cache Now for better Results.....";
+ui_print "***********Panchajanya Sarkar****************";
 
 umount /system;
 umount /data 2>/dev/null;
-ui_print " ";
-ui_print "Done!";
+ui_print "**Kernel Successfully Flashed On Your Device!!";
+ui_print "**Done!";
