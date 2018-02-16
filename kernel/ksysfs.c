@@ -243,7 +243,7 @@ static ssize_t arch_power_store(struct kobject *kobj, struct kobj_attribute *att
  input = 0;
 
  Larch_power = input;
- relay_ap(Larch_power);
+ void relay_ap(Larch_power);
  return count;
 }
 KERNEL_ATTR_RW(arch_power);
