@@ -1234,6 +1234,8 @@ static int ipa_wwan_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 				mutex_unlock(&add_mux_channel_lock);
 				return -EFAULT;
 			}
+			extend_ioctl_data.u.rmnet_mux_val.vchannel_name
+				[IFNAMSIZ-1] = '\0';
 			IPAWANDBG("ADD_MUX_CHANNEL(%d, name: %s)\n",
 			extend_ioctl_data.u.rmnet_mux_val.mux_id,
 			extend_ioctl_data.u.rmnet_mux_val.vchannel_name);
@@ -1952,6 +1954,8 @@ static int __init ipa_wwan_init(void)
 		return -ENOMEM;
 	mutex_init(&add_mux_channel_lock);
 
+	mutex_init(&add_mux_channel_lock);
+	/* Register for Modem SSR */
 	subsys = subsys_notif_register_notifier(SUBSYS_MODEM, &ssr_notifier);
 	if (!IS_ERR(subsys)) {
 		return platform_driver_register(&rmnet_ipa_driver);

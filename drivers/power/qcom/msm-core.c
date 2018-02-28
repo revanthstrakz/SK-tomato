@@ -342,7 +342,6 @@ static int update_userspace_power(struct sched_params __user *argp)
 	if (!sp)
 		return -ENOMEM;
 
-
 	mutex_lock(&policy_update_mutex);
 	sp->power = allocate_2d_array_uint32_t(node->sp->num_of_freqs);
 	if (IS_ERR_OR_NULL(sp->power)) {
