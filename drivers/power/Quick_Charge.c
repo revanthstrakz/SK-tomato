@@ -1,7 +1,7 @@
-/* Quick Charge v1.0, a Fast-Charge Driver Based on the Idea of Qualcomm's 
+/* Quick Charge v1.0, a Fast-Charge Driver Based on the Idea of Qualcomm's
  * Quick-Charge Technology.
  *
- * For this Driver to Work properly, a Wall-Charger Capable of Supplying 
+ * For this Driver to Work properly, a Wall-Charger Capable of Supplying
  * 1.5A Output is Required.
  *
  * Copyright (c) 2017, Shoaib Anwar <Shoaib0595@gmail.com>.
@@ -19,7 +19,7 @@
 
 #define ENABLED			1
 #define QUICK_CHARGE		"Quick_Charge"
-#define AC_CURRENT		1000
+#define AC_CURRENT		1350
 
 // Enable/Disable Toggle.
 int QC_Toggle = ENABLED;
@@ -67,11 +67,11 @@ void batt_level (int Battery_Status)
 	{
 	   // Mechanism of Driver to Allocate Current (mA).
  	   if (Battery_Percent >= 0 && Battery_Percent <= 60)
-	      Dynamic_Current = 1250;
+	      Dynamic_Current = 1350;
 	   else if (Battery_Percent >= 61 && Battery_Percent <= 90)
-		   Dynamic_Current = 1125;
+		   Dynamic_Current = 1250;
 	   else if (Battery_Percent >= 91 && Battery_Percent <= 100)
-  	           Dynamic_Current = 1000;
+  	           Dynamic_Current = 1150;
 	}
 	else
 	{
@@ -81,7 +81,7 @@ void batt_level (int Battery_Status)
 	    else if (Battery_Percent >= 61 && Battery_Percent <= 90)
 		    Dynamic_Current = 1250;
 	    else if (Battery_Percent >= 91 && Battery_Percent <= 100)
-  	            Dynamic_Current = 1000;
+  	            Dynamic_Current = 1150;
 	}
 }
 
@@ -138,15 +138,15 @@ static ssize_t charging_profile_show(struct kobject *kobj, struct kobj_attribute
 static ssize_t charging_profile_store(struct kobject *kobj, struct kobj_attribute *attr, const char *buf, size_t count)
 {
 	int val;
-	
+
 	sscanf (buf, "%d", &val);
-	
+
 	if (val < 0 || val > 1)
 	   return EINVAL;
 
 	Charging_Profile = val;
 
-	// Call Battery (%) Status-Reader Function to Update Dynamic Current (mA) Value.	
+	// Call Battery (%) Status-Reader Function to Update Dynamic Current (mA) Value.
 	batt_level (Battery_Percent);
 
 	return count;
@@ -161,7 +161,7 @@ static struct kobj_attribute qc_toggle_attribute =
 static struct kobj_attribute actual_current_attribute =
 	__ATTR(Actual_Current,
 		0444,
-		actual_current_show, 
+		actual_current_show,
 		NULL);
 
 static struct kobj_attribute charging_profile_attribute =
@@ -177,7 +177,7 @@ static struct attribute *charger_control_attrs[] =
 		&charging_profile_attribute.attr,
 		NULL,
 	};
-	
+
 static struct attribute_group chgr_control_attr_group =
 	{
 		.attrs = charger_control_attrs,
@@ -192,7 +192,7 @@ static int charger_control_probe(void)
 
 	charger_control_kobj = kobject_create_and_add("Quick_Charge", kernel_kobj);
 
-	if (!charger_control_kobj) 
+	if (!charger_control_kobj)
 	{
 	   pr_err("%s Interface create failed!\n", __FUNCTION__);
 	   return -ENOMEM;
@@ -200,7 +200,7 @@ static int charger_control_probe(void)
 
 	sysfs_result = sysfs_create_group(charger_control_kobj, &chgr_control_attr_group);
 
-	if (sysfs_result) 
+	if (sysfs_result)
 	{
 	   pr_info("%s sysfs create failed!\n", __FUNCTION__);
 	   kobject_put(charger_control_kobj);
