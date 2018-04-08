@@ -110,10 +110,10 @@ unsigned int __read_mostly sysctl_sched_wake_to_idle;
  * have immediate wakeup/sleep latencies.
  */
 #ifdef CONFIG_ZEN_INTERACTIVE
-unsigned int sysctl_sched_wakeup_granularity = 500000UL;
-unsigned int normalized_sysctl_sched_wakeup_granularity = 500000UL;
+unsigned int sysctl_sched_wakeup_granularity = 250000UL;
+unsigned int normalized_sysctl_sched_wakeup_granularity = 250000UL;
 
-const_debug unsigned int sysctl_sched_migration_cost = 250000UL;
+const_debug unsigned int sysctl_sched_migration_cost = 125000UL;
 #else
 unsigned int sysctl_sched_wakeup_granularity = 1000000UL;
 unsigned int normalized_sysctl_sched_wakeup_granularity = 1000000UL;
