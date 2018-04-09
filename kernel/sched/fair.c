@@ -82,7 +82,7 @@ unsigned int normalized_sysctl_sched_min_granularity = 750000ULL;
  * is kept at sysctl_sched_latency / sysctl_sched_min_granularity
  */
 #ifdef CONFIG_ZEN_INTERACTIVE
-static unsigned int sched_nr_latency = 10;
+static unsigned int sched_nr_latency = 15;
 #else
 static unsigned int sched_nr_latency = 8;
 #endif
