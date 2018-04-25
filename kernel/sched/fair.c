@@ -1292,7 +1292,7 @@ unsigned int __read_mostly sysctl_sched_mostly_idle_nr_run = 3;
  * Control whether or not individual CPU power consumption is used to
  * guide task placement.
  */
-unsigned int __read_mostly sched_enable_power_aware = 0;
+unsigned int __read_mostly sched_enable_power_aware = 1;
 
 /*
  * This specifies the maximum percent power difference between 2
@@ -1346,7 +1346,7 @@ unsigned int __read_mostly sched_heavy_task;
  * capacity.
  */
 unsigned int __read_mostly sched_upmigrate;
-unsigned int __read_mostly sysctl_sched_upmigrate_pct = 90;
+unsigned int __read_mostly sysctl_sched_upmigrate_pct = 95;
 
 /*
  * Big tasks, once migrated, will need to drop their bandwidth
@@ -1376,7 +1376,7 @@ unsigned int __read_mostly sysctl_sched_prefer_idle;
  * ended up with their load characteristics. Any entity enabling
  * boost is responsible for disabling it as well.
  */
-unsigned int sysctl_sched_boost;
+unsigned int sysctl_sched_boost=0;
 
 static inline int available_cpu_capacity(int cpu)
 {
