@@ -61,7 +61,7 @@
 
 #define WCD9XXX_MBHC_DEF_BUTTONS    8
 #define WCD9XXX_MBHC_DEF_RLOADS     5
-#define CODEC_EXT_CLK_RATE         9600000
+#define CODEC_EXT_CLK_RATE         11289600
 
 #define PRI_MI2S_ID	(1 << 0)
 #define SEC_MI2S_ID	(1 << 1)

@@ -72,7 +72,7 @@ static int previous_bias_level = SND_SOC_BIAS_OFF;
 
 #define WCD9XXX_MBHC_DEF_BUTTONS 8
 #define WCD9XXX_MBHC_DEF_RLOADS 5
-#define DEFAULT_MCLK_RATE 9600000
+#define DEFAULT_MCLK_RATE 11289600
 
 #define WCD_MBHC_DEF_RLOADS 5
 
