@@ -26,7 +26,7 @@ function check_gcc_toolchain() {
 check_gcc_toolchain()
 
 
-function transfer() {
+transfer() {
     curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename $1) | tee /dev/null;
 }
 alias transfer=transfer
