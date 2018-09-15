@@ -1,10 +1,10 @@
 #!/bin/bash
-#export KBUILD_BUILD_USER="root"
-#export KBUILD_BUILD_HOST="Macintosh_High-Sierra"
+export KBUILD_BUILD_USER="RevanthStrakz"
+export KBUILD_BUILD_HOST="PandaMachine"
 rm -rf py2env
 mkdir py2env && virtualenv2 py2env
 source py2env/bin/activate
-export CROSS_COMPILE=/home/panchajanya/Kernel/Toolchains/my-toolchain/bin/aarch64-linux-android-
+export CROSS_COMPILE=~/TC/bin/aarch64-linux-android-
 export ARCH=arm64
 export SUBARCH=arm64
 make clean && make mrproper
@@ -43,9 +43,9 @@ mv $KERNEL_DIR/arch/arm64/boot/Image zImage
 mv $KERNEL_DIR/arch/arm64/boot/dt.img dt.img
 #mv $KERNEL_DIR/drivers/staging/prima/wlan.ko modules/wlan.ko
 echo "Making Zip"
-zip -r AzurE-Oreo-$BUILD_TIME *
+zip -r SK-Tomato-Oreo-$BUILD_TIME *
 cd ..
 mv anykernel/AzurE-Oreo-$BUILD_TIME.zip /home/panchajanya/Kernel/Zips/Azure-Builds/Oreo-Builds/AzurE-Oreo-$BUILD_TIME.zip
-echo -e "Kernel is named as $yellow AzurE-Oreo-$BUILD_TIME.zip $nocol and can be found at $yellow /home/panchajanya/Kernel/Zips/Azure-Builds/Oreo-Builds.$nocol"
+echo -e "Kernel is named as $yellow SK-Tomato-Oreo-$BUILD_TIME.zip $nocol and can be found at $yellow /home/panchajanya/Kernel/Zips/Azure-Builds/Oreo-Builds.$nocol"
 fi
 cd
