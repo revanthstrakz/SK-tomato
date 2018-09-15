@@ -1,4 +1,19 @@
 #!/bin/bash
+
+
+install-package ccache bc bash libncurses5-dev git-core gnupg flex bison gperf build-essential \
+  zip curl libc6-dev ncurses-dev binfmt-support libllvm-3.6-ocaml-dev llvm-3.6 llvm-3.6-dev llvm-3.6-runtime \
+  cmake automake autogen autoconf autotools-dev libtool shtool python m4 gcc libtool zlib1g-dev
+
+
+git clone clone https://github.com/krasCGQ/aarch64-linux-android.git --branch "opt-linaro-7.x" ~/TC
+
+
+transfer() {
+    curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename $1) | tee /dev/null;
+}
+alias transfer=transfer
+
 export KBUILD_BUILD_USER="RevanthStrakz"
 export KBUILD_BUILD_HOST="PandaMachine"
 rm -rf py2env
@@ -45,7 +60,7 @@ mv $KERNEL_DIR/arch/arm64/boot/dt.img dt.img
 echo "Making Zip"
 zip -r SK-Tomato-Oreo-$BUILD_TIME *
 cd ..
-mv anykernel/AzurE-Oreo-$BUILD_TIME.zip /home/panchajanya/Kernel/Zips/Azure-Builds/Oreo-Builds/AzurE-Oreo-$BUILD_TIME.zip
+transfer SK-Tomato-Oreo-$BUILD_TIME.zip
 echo -e "Kernel is named as $yellow SK-Tomato-Oreo-$BUILD_TIME.zip $nocol and can be found at $yellow /home/panchajanya/Kernel/Zips/Azure-Builds/Oreo-Builds.$nocol"
 fi
 cd
