@@ -6,7 +6,7 @@ install-package ccache bc bash libncurses5-dev git-core gnupg flex bison gperf b
   cmake automake autogen autoconf autotools-dev libtool shtool python m4 gcc libtool zlib1g-dev
 
 
-git clone clone https://github.com/krasCGQ/aarch64-linux-android.git --branch "opt-linaro-7.x" ~/TC
+git clone https://github.com/krasCGQ/aarch64-linux-android.git --branch "opt-linaro-7.x" ~/TC
 
 
 function check_gcc_toolchain() {
