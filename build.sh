@@ -9,7 +9,22 @@ install-package ccache bc bash libncurses5-dev git-core gnupg flex bison gperf b
 git clone clone https://github.com/krasCGQ/aarch64-linux-android.git --branch "opt-linaro-7.x" ~/TC
 
 
-transfer() {
+function check_gcc_toolchain() {
+    export TC="$(find ~/TC/bin -type f -name *-gcc)"
+  if [[ -f "${TC}" ]]; then
+    export CROSS_COMPILE="~/TC/bin/$(echo ${TC} | \
+        awk -F '/' '{print $NF'} | \
+        sed -e 's/gcc//')"
+    echo "Using toolchain: $(${CROSS_COMPILE}gcc --version | head -1)";
+  else
+    echo "No suitable toolchain found in ~/TC"
+    tg_senderror
+    exit 1;
+  fi
+}
+
+
+function transfer() {
     curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename $1) | tee /dev/null;
 }
 alias transfer=transfer
