@@ -55,7 +55,8 @@ mv $KERNEL_DIR/arch/arm64/boot/dt.img dt.img
 echo "Making Zip"
 zip -r SK-Tomato-Oreo-$BUILD_TIME *
 cd ..
-transfer SK-Tomato-Oreo-$BUILD_TIME.zip
+curl --upload-file ./SK-Tomato-Oreo-$BUILD_TIME.zip https://transfer.sh/SK-Tomato-Oreo-$BUILD_TIME.zip 
+
 echo -e "Kernel is named as $yellow SK-Tomato-Oreo-$BUILD_TIME.zip $nocol and can be found at $yellow /home/panchajanya/Kernel/Zips/Azure-Builds/Oreo-Builds.$nocol"
 fi
 cd
