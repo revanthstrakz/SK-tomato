@@ -9,31 +9,12 @@ install-package ccache bc bash libncurses5-dev git-core gnupg flex bison gperf b
 git clone https://github.com/krasCGQ/aarch64-linux-android.git --branch "opt-linaro-7.x" ~/TC
 
 
-function check_gcc_toolchain() {
-    export TC="$(find ~/TC/bin -type f -name *-gcc)"
-  if [[ -f "${TC}" ]]; then
-    export CROSS_COMPILE="~/TC/bin/$(echo ${TC} | \
-        awk -F '/' '{print $NF'} | \
-        sed -e 's/gcc//')"
-    echo "Using toolchain: $(${CROSS_COMPILE}gcc --version | head -1)";
-  else
-    echo "No suitable toolchain found in ~/TC"
-    tg_senderror
-    exit 1;
-  fi
-}
-
-check_gcc_toolchain()
-
-
-
-
 export KBUILD_BUILD_USER="RevanthStrakz"
 export KBUILD_BUILD_HOST="PandaMachine"
 rm -rf py2env
 mkdir py2env && virtualenv2 py2env
 source py2env/bin/activate
-export CROSS_COMPILE=~/TC/bin/aarch64-linux-android-
+export CROSS_COMPILE=~/TC/bin/aarch64-opt-linux-android-
 export ARCH=arm64
 export SUBARCH=arm64
 make clean && make mrproper
