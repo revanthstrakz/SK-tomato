@@ -23,6 +23,8 @@ function check_gcc_toolchain() {
   fi
 }
 
+check_gcc_toolchain()
+
 
 function transfer() {
     curl --progress-bar --upload-file "$1" https://transfer.sh/$(basename $1) | tee /dev/null;
